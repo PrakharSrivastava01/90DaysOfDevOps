@@ -382,9 +382,29 @@ Setting files to read-only (444 or using `chmod -w`) provides protection against
 
 ### Security Considerations
 - Minimize execute permissions on files
-- Restrict write access to owner when possible
+- Restrict write access to the owner when possible
 - Remove "others" permissions for sensitive data
 - Regular audit of file permissions
 - Use groups effectively for team access
 
 ---
+
+
+** screenshots **
+
+- <img width="396" height="1093" alt="Screenshot 2026-02-03 152527" src="https://github.com/user-attachments/assets/e9b39393-e4c3-4b94-afd8-c6bd7d8731b6" />
+- <img width="897" height="1000" alt="Screenshot 2026-02-03 152909" src="https://github.com/user-attachments/assets/a1116d50-1d1b-4ac3-9dc1-f300e2e3bdf6" />
+- <img width="1372" height="716" alt="Screenshot 2026-02-03 153016" src="https://github.com/user-attachments/assets/fc0cb9e7-69dc-4752-925d-e54ac2e6b6e5" />
+- <img width="1484" height="1016" alt="Screenshot 2026-02-03 153054" src="https://github.com/user-attachments/assets/4b09b782-3ac7-4823-abee-ac93ff8bb3ed" />
+- <img width="980" height="1094" alt="Screenshot 2026-02-03 154652" src="https://github.com/user-attachments/assets/2d6f6867-619d-48cb-9cb4-ed024b1528e0" />
+- <img width="1147" height="419" alt="Screenshot 2026-02-03 161011" src="https://github.com/user-attachments/assets/8091e2f7-c9c3-478a-a66b-bcbecfae5659" />
+- <img width="674" height="1118" alt="Screenshot 2026-02-03 180829" src="https://github.com/user-attachments/assets/e53d4a8b-40c9-46b6-af6d-1bf49cb1fd7b" />
+- <img width="915" height="876" alt="Screenshot 2026-02-03 181929" src="https://github.com/user-attachments/assets/4de4d6d8-fd9b-4b52-bdf2-4d06845fc7ce" />
+- <img width="674" height="1118" alt="Screenshot 2026-02-03 180829" src="https://github.com/user-attachments/assets/169ce6fe-db5e-426b-9d91-d2cb0b3e15b6" />
+
+
+
+
+
+
+
