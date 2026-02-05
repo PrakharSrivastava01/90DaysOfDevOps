@@ -581,11 +581,18 @@ Muscle memory develops faster than expected
 
 What Excites Me About Next Phase
 
-Building on solid foundation
+Building on a solid foundation
 Solving real problems
 Speed improvement through practice
-Starting to "think in Linux"
+Starting to "think in Linux."
 Ready for more advanced topics
+
+** Screenshots **
+
+- <img width="1590" height="1094" alt="Screenshot 2026-02-05 110344" src="https://github.com/user-attachments/assets/2b559d1c-42f4-498b-831b-57b49c3f2efb" />
+<img width="1200" height="1097" alt="Screenshot 2026-02-05 110406" src="https://github.com/user-attachments/assets/5da48e93-f814-4d94-b397-c8a7bac67292" />
+- <img width="1613" height="1041" alt="Screenshot 2026-02-05 110507" src="https://github.com/user-attachments/assets/406671a1-fa90-4ac3-a807-5cdae2a26984" />
+- <img width="740" height="1094" alt="Screenshot 2026-02-05 110551" src="https://github.com/user-attachments/assets/4e6141fe-e3c6-4575-9e53-f6c58fe1644c" />
 
 
 
