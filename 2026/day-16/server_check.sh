@@ -2,13 +2,22 @@
 
 
 read -p " Which service's status You want to check: ? " service
-read -p " Do you want to check the status of $service ? Y/N " answer
- 
-if [ $answer=Y ];then
-	sudo systemctl status $service
-	echo " $service is running "
+read -p " Do you want to check the status of $service ? Y/N/D " answer
+
+if [ "$answer" = "Y" ];then
+        sudo systemctl status "$service"
+        echo " $service is running "
+
+elif [ "$answer" = "D" ];then
+         sudo apt-get update 
+         sudo apt-get install "$service"
+         echo " Installation done..! " 
+         sudo systemctl start "$service"
+         sudo systemctl status "$service"
+
+elif [ "$answer" = "N" ];then
+        echo "skipped"
+
 else
-	echo " Skipped "
-
-fi 
-
+        echo " Task successfully..! "
+fi
