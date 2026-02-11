@@ -1,3 +1,74 @@
+# 🌟 My 90DaysOfDevOps Journey (2026)
+
+This repository is my fork of the original #90DaysOfDevOps challenge by TrainWithShubham.
+
+I am documenting my hands-on learning daily with command outputs, explanations, and real troubleshooting observations.
+
+---
+
+## 🔥 Current Progress
+
+**Completed:** Day 01 – Day 17  
+**In Progress:** Shell Scripting  
+**Focus Areas Covered So Far:**
+- Linux Fundamentals
+- File Permissions & Ownership
+- User & Group Management
+- Networking Basics (DNS, IP, Subnetting, Ports)
+- Troubleshooting Commands
+- Git & GitHub Workflows
+
+---
+
+## 📅 2026 Progress Tracker
+
+### 🐧 Linux Fundamentals
+- Day 01 – Introduction & Setup
+- Day 02 – Basic Linux Commands
+- Day 03 – File System & Navigation
+- Day 04 – File Operations
+- Day 05 – Text Processing
+- Day 06 – Process Management
+- Day 07 – Package Management
+- Day 08 – Permissions Deep Dive
+- Day 09 – User Management
+- Day 10 – File Permissions
+- Day 11 – File Ownership
+- Day 12 – Advanced Linux Concepts
+- Day 13 – Linux Practice & Troubleshooting
+
+### 🌐 Networking
+- Day 14 – Networking Fundamentals
+- Day 15 – DNS, IP, Subnets & Ports
+- Day 16 – Networking Commands Practice
+- Day 17 – Connectivity & Port Checks
+
+### 🧠 Shell Scripting (WIP)
+- Basic scripting structure
+- Variables & arguments
+- Conditional statements
+- Loops (in progress)
+
+---
+
+## 📌 What This Repository Shows
+
+- Consistent daily practice
+- Command-level understanding
+- Real output documentation
+- Clean Git history
+- Structured DevOps learning path
+
+> This is not just notes — this is proof of work.
+
+---
+
+
+
+
+
+
+
 # 🚀 90DaysOfDevOps
 ### Learn • Build • Practice • Become Job-Ready
 
