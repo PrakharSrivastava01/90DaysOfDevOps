@@ -181,3 +181,7 @@ Interesting finding:
 
 Networking feels much less abstract now.
 
+
+![alt text](<Screenshot 2026-02-11 165231.png>)
+![alt text](<Screenshot 2026-02-11 165138.png>)
+![alt text](<Screenshot 2026-02-11 165000.png>)
