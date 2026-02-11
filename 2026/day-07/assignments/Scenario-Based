@@ -1,0 +1,514 @@
+# Day 07 - Part 2: Scenario-Based Practice
+
+## Understanding the Troubleshooting Mindset
+
+**Key Principle:** Don't just memorize commands. Understand the **flow**:
+1. What am I trying to find out?
+2. What command helps me discover that?
+3. What does the output tell me?
+4. What's my next logical step?
+
+---
+
+## SOLVED EXAMPLE (Given in Assignment)
+
+### Example: Check if a service is running
+
+**Question:** How do you check if the 'nginx' service is running?
+
+**My Solution (Step by step):**
+
+**Step 1: Check service status**
+```bash
+systemctl status nginx
+```
+**Why this command?** It shows if the service is active, failed, or stopped
+
+**Step 2: If service is not found, list all services**
+```bash
+systemctl list-units --type=service
+```
+**Why this command?** To see what services exist on the system
+
+**Step 3: Check if service is enabled on boot**
+```bash
+systemctl is-enabled nginx
+```
+**Why this command?** To know if it will start automatically after reboot
+
+**Step-4: To check all the services(files) listed**
+'''bash
+systemctl list-unit-files
+```
+**Why this command?** To check how many services are list overall
+
+**What I learned:** Always check status first, then investigate based on what you see.
+
+---
+
+## Scenario 1: Service Not Starting
+
+### Problem Statement
+A web application service called 'myapp' failed to start after a server reboot.
+What commands would you run to diagnose the issue?
+
+### My Solution
+
+**Step 1: Check if the service is running or failed**
+```bash
+systemctl status myapp
+```
+**Why?** 
+This is the FIRST thing you check. It tells me:
+- Is it running? (active)
+- Did it fail? (failed)
+- Is it stopped? (inactive)
+- What's the recent error message?
+
+**Expected output might show:**
+```
+● myapp.service - My Web Application
+   Loaded: loaded (/etc/systemd/system/myapp.service)
+   Active: failed (Result: exit-code)
+```
+
+---
+
+**Step 2: Read the service logs to find the error**
+```bash
+journalctl -u myapp -n 50
+```
+**Why?**
+The status only shows a brief message. The logs show the FULL error details - maybe a config file is missing, a port is already in use, or a dependency failed.
+
+**What to look for:**
+- Error messages
+- Failed to bind to port
+- Permission denied
+- Missing files
+
+---
+
+**Step 3: Check if service is enabled to start on boot**
+```bash
+systemctl is-enabled myapp
+```
+**Why?**
+If it shows "disabled", the service won't auto-start after reboot. This explains why it didn't come back up after the server restarted!
+
+**Expected output:**
+```
+disabled  ← This is the problem!
+```
+
+---
+
+**Step 4: Enable it and try to start**
+```bash
+systemctl enable myapp
+systemctl start myapp
+```
+**Why?**
+- `enable` = make it start on boot
+- `start` = start it right now
+
+---
+
+**Step 5: Verify it's running now**
+```bash
+systemctl status myapp
+```
+**Why?**
+Confirm the fix worked and service is now active.
+
+**Success looks like:**
+```
+● myapp.service - My Web Application
+   Active: active (running)
+```
+
+---
+
+### What I Learned
+After a reboot, if a service doesn't come back up:
+1. Check status (failed/inactive)
+2. Read logs (what's the actual error)
+3. Check if enabled (should it auto-start?)
+4. Fix and verify
+
+---
+
+## Scenario 2: High CPU Usage
+
+### Problem Statement
+Your manager reports that the application server is slow.
+You SSH into the server. What commands would you run to identify which process is using high CPU?
+
+### My Solution
+
+**Step 1: View live CPU usage with top**
+```bash
+top
+```
+**Why?**
+This shows real-time CPU usage. Processes are sorted by CPU % by default. The top process is your culprit!
+
+**What to look for:**
+```
+PID  USER   %CPU  %MEM  COMMAND
+1234 webapp 98.5  25.2  python app.py
+5678 mysql  45.3  30.1  mysqld
+```
+**Note the PID (Process ID)** of the high CPU process - you'll need it!
+
+**Tip:** Press 'q' to quit top
+
+---
+
+**Step 2: Get a snapshot sorted by CPU**
+```bash
+ps aux --sort=-%cpu | head -10
+```
+**Why?**
+This gives you a **snapshot** (not live) of top 10 processes by CPU usage. Easier to copy/paste or document for reporting.
+
+**Output example:**
+```
+USER   PID  %CPU %MEM    VSZ   RSS TTY  STAT START   TIME COMMAND
+webapp 1234 95.3 25.2 450200 51244 ?   R    14:23  45:32 python app.py
+mysql  5678 42.1 30.1 892340 61532 ?   Ssl  09:15  12:45 /usr/sbin/mysqld
+```
+
+---
+
+**Step 3: Investigate the process details**
+```bash
+ps -p 1234 -f
+```
+**Why?**
+Once you know the PID (e.g., 1234), get full details:
+- Full command line
+- When it started
+- Who owns it
+
+**Output example:**
+```
+UID    PID  PPID  C STIME TTY  TIME     CMD
+webapp 1234 1    99 14:23  ?   00:45:32 python /opt/myapp/app.py --config prod.conf
+```
+
+---
+
+**Step 4: Check what files the process is using**
+```bash
+lsof -p 1234
+```
+**Why?**
+See what files, network connections, or resources this process has open. Maybe it's stuck reading a huge file or has too many connections.
+
+---
+
+**Step 5: Decision time - kill or investigate?**
+
+**Option A: Kill the process (if it's stuck/frozen)**
+```bash
+kill -9 1234
+```
+
+**Option B: Restart the service properly**
+```bash
+systemctl restart myapp
+```
+
+**Option C: Check application logs first**
+```bash
+tail -f /var/log/myapp/error.log
+```
+
+**Why?**
+Don't blindly kill! Understand WHY it's using high CPU first. Maybe it's:
+- Processing a legitimate task
+- In an infinite loop (bug)
+- Under DDoS attack
+- Resource leak
+
+---
+
+### What I Learned
+When hunting high CPU:
+1. Use `top` to find the culprit (live view)
+2. Use `ps aux --sort` for a clean snapshot
+3. Note the PID
+4. Investigate before killing
+5. Check application logs to understand WHY
+
+---
+
+## Scenario 3: Finding Service Logs
+
+### Problem Statement
+A developer asks: "Where are the logs for the 'docker' service?"
+The service is managed by systemd. What commands would you use?
+
+### My Solution
+
+**Step 1: Verify the service exists and check status**
+```bash
+systemctl status docker
+```
+**Why?**
+First confirm the service name is correct and check if it's running. The status output also shows a **hint** about recent log entries.
+
+**Output shows:**
+```
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service)
+   Active: active (running) since Mon 2026-02-01 10:30:15
+```
+
+---
+
+**Step 2: View the last 50 lines of docker logs**
+```bash
+journalctl -u docker -n 50
+```
+**Why?**
+- `journalctl` = systemd's log viewer
+- `-u docker` = filter for docker service only
+- `-n 50` = show last 50 lines
+
+**This is the most common way to check service logs!**
+
+**Output example:**
+```
+Feb 01 10:30:15 server dockerd[1234]: Starting Docker daemon
+Feb 01 10:30:16 server dockerd[1234]: API listen on /var/run/docker.sock
+Feb 01 10:35:22 server dockerd[1234]: Container abc123 started
+```
+
+---
+
+**Step 3: Follow logs in real-time (like tail -f)**
+```bash
+journalctl -u docker -f
+```
+**Why?**
+The `-f` flag means "follow" - logs stream live as they happen. Perfect for watching errors in real-time while testing.
+
+**Use case:** Developer makes a change, you watch the logs live to see if errors appear.
+
+**Tip:** Press Ctrl+C to stop following
+
+---
+
+**Step 4: View logs with timestamps and priorities**
+```bash
+journalctl -u docker -n 100 --no-pager
+```
+**Why?**
+- `--no-pager` = don't use 'less', just print everything
+- Shows full timestamps
+- Easier to copy/paste into tickets or documentation
+
+---
+
+**Step 5: Check logs from a specific time period**
+```bash
+journalctl -u docker --since "2026-02-01 09:00:00" --until "2026-02-01 10:00:00"
+```
+**Why?**
+If the developer says "something broke around 9:30 AM", you can filter logs to that specific time window.
+
+---
+
+### Alternative: Traditional Log Files
+
+**Some services also write to /var/log:**
+```bash
+ls -l /var/log/docker/
+tail -f /var/log/docker/docker.log
+```
+
+**Why check both?**
+- Systemd services → `journalctl` (primary)
+- Some apps also write to `/var/log` (secondary)
+
+---
+
+### What I Learned
+For systemd-managed services:
+1. Use `journalctl -u <service>` NOT files in /var/log
+2. `-n 50` = last 50 lines (quick check)
+3. `-f` = follow live (debugging)
+4. `--since` and `--until` = time filtering (incident investigation)
+
+**Key insight:** Modern Linux uses journald, not just text files!
+
+---
+
+## Scenario 4: File Permissions Issue
+
+### Problem Statement
+A script at `/home/user/backup.sh` is not executing.
+When you run: `./backup.sh`
+You get: **"Permission denied"**
+
+What commands would you use to fix this?
+
+### My Solution
+
+**Step 1: Check current permissions**
+```bash
+ls -l /home/user/backup.sh
+```
+**Why?**
+See what permissions the file currently has. Look for the execute permission 'x'.
+
+**Output example:**
+```
+-rw-r--r-- 1 user user 1234 Feb 01 10:00 backup.sh
+```
+
+**Breaking it down:**
+```
+-rw-r--r--
+ │││ │ │
+ │││ │ └─ Others: read only
+ │││ └─── Group: read only
+ ││└───── User: read + write
+ │└────── File type: - (regular file)
+ └─────── NO 'x' = NOT executable!
+```
+
+**Problem identified:** Missing 'x' (execute) permission!
+
+---
+
+**Step 2: Add execute permission**
+```bash
+chmod +x /home/user/backup.sh
+```
+**Why?**
+The `+x` adds execute permission for the file owner.
+
+**What it does:**
+- Before: `-rw-r--r--`
+- After:  `-rwxr-xr-x`
+
+**Alternative commands:**
+```bash
+chmod u+x backup.sh    # Add execute for user only
+chmod 755 backup.sh    # User: rwx, Group: r-x, Others: r-x
+chmod 700 backup.sh    # User: rwx, Group: ---, Others: ---
+```
+
+---
+
+**Step 3: Verify the permission changed**
+```bash
+ls -l /home/user/backup.sh
+```
+**Why?**
+Always verify your changes worked!
+
+**Expected output:**
+```
+-rwxr-xr-x 1 user user 1234 Feb 01 10:00 backup.sh
+       ^^^
+   Now has 'x'!
+```
+
+---
+
+**Step 4: Try running the script**
+```bash
+./backup.sh
+```
+**Why?**
+Test if the fix worked. The script should now execute!
+
+**If it still fails with a different error:**
+- Check the shebang line: `#!/bin/bash`
+- Check if the script has syntax errors: `bash -n backup.sh`
+- Check if dependencies exist: `which rsync`
+
+---
+
+**Step 5: (Bonus) Check script ownership**
+```bash
+ls -l /home/user/backup.sh
+```
+**Look at owner and group:**
+```
+-rwxr-xr-x 1 user user 1234 Feb 01 10:00 backup.sh
+              ^^^^ ^^^^
+              owner group
+```
+
+**If you're not the owner, you might need:**
+```bash
+sudo chmod +x /home/user/backup.sh
+# or
+sudo chown youruser:yourgroup /home/user/backup.sh
+```
+
+---
+
+### Understanding Permissions Recap
+
+**Permission format: -rwxrwxrwx**
+```
+Position:  1    2-4    5-7    8-10
+Meaning:  type  user   group  others
+
+r = read    (4)
+w = write   (2)
+x = execute (1)
+```
+
+**Common permission patterns:**
+```bash
+-rwxr-xr-x  755  Script executable by all
+-rw-r--r--  644  Document readable by all
+-rwx------  700  Private script (owner only)
+-rw-------  600  Private file (owner only)
+```
+
+---
+
+### What I Learned
+Permission denied on scripts:
+1. Check permissions with `ls -l`
+2. Look for missing 'x' flag
+3. Add execute with `chmod +x`
+4. Verify with `ls -l` again
+5. Test by running it
+
+**Remember:** Files need 'x' to execute, directories need 'x' to enter!
+
+---
+
+## Summary: Troubleshooting Mindset
+
+| Scenario | First Check | Deep Dive | Fix | Verify |
+|----------|------------|-----------|-----|--------|
+| Service not starting | `systemctl status` | `journalctl -u` | `enable` + `start` | `status` again |
+| High CPU | `top` | `ps aux --sort` | Investigate, then kill/restart | Monitor |
+| Find logs | `systemctl status` | `journalctl -u` | N/A | `-f` to follow |
+| Permission denied | `ls -l` | Check owner | `chmod +x` | `ls -l` + test |
+
+---
+
+## Key Takeaways
+
+1. **Always understand WHY before HOW** - don't blindly run commands
+2. **Start broad, then narrow** - status → logs → specific error
+3. **Verify your fixes** - always check if it worked
+4. **Document the flow** - helps you remember next time
+
+**DevOps mindset = Systematic troubleshooting, not command memorization!**
+
+---
+
+## Practice Complete ✓
+Date: Day 07 of Linux Fundamentals
