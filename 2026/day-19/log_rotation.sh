@@ -1,26 +1,19 @@
 #!/bin/bash
-<< help
-This script will take a backup
-help
 
-source="$1"
-destination="$2"
-timestamp=$(date +"%Y%m%d%H%M%S")
+function rotate_logs() {
 
-function log_read() {
+    if [ ! -d "$1" ]; then
+        echo "Directory not found"
+        exit 1
+    fi
 
-        zip -r "${destination}/backup_${timestamp}.zip" "${source}" 2> /dev/null
+    echo "Compressing logs older than 7 days..."
+    find "$1" -type f -name "*.log" -mtime +7 -exec gzip {} \;
 
-        if [ $? -eq 0 ];then
+    echo "Deleting logs older than 30 days..."
+    find "$1" -type f -name "*.gz" -mtime +30 -delete
 
-        echo "backup taken successfully..!"
-
-        fi
+    echo "Log rotation complete"
 }
-function log_rotation() {
 
-        backup=($(ls -t "${destination}/backup_"*.zip 2>/dev/null))
-        echo "${backup[@]}"
-}
-log_rotation
-log_read $1 $2
+rotate_logs $1
