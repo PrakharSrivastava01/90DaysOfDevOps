@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Day 22 – Introduction to Git (Notes)
-=======
 i# Day 22 – Introduction to Git (Notes)
->>>>>>> 7bb47cba113a1d767b397bbb03cebcdc2dc86f52
 
 ## 1️⃣ Difference between `git add` and `git commit`
 
@@ -57,7 +53,4 @@ Working Directory → Staging Area → Repository
 * Git tracks changes as snapshots, not file differences.
 * Clean commit messages improve project readability.
 * `git status` is the most important command while learning Git.
-<<<<<<< HEAD
-=======
 
->>>>>>> 7bb47cba113a1d767b397bbb03cebcdc2dc86f52
