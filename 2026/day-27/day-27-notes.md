@@ -65,11 +65,13 @@ Pinned:
 ## 3️⃣ Before & After Screenshots
 
 ### Before:
-(Add screenshot here)
+
+<img width="1792" height="1009" alt="Screenshot 2026-02-20 195543" src="https://github.com/user-attachments/assets/1b1df51e-8071-433e-bd63-fd9d6b48c6e6" />
 
 
 ### After:
-(Add screenshot here)
+
+<img width="541" height="981" alt="Screenshot 2026-02-20 194617" src="https://github.com/user-attachments/assets/f7ba111a-da08-4ea3-81c3-e1f377ee8fde" />
 
 ---
 
