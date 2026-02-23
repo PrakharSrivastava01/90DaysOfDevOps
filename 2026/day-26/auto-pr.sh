@@ -5,7 +5,7 @@ set -e
 REPO_NAME="auto-gh-demo-$(date +%s)"
 BRANCH_NAME="feature/update-readme"
 
-echo "🚀 Creating repository..."
+echo "Creating repository..."
 gh repo create "$REPO_NAME" --public --clone --add-readme
 
 cd "$REPO_NAME"
@@ -36,7 +36,7 @@ git add .
 git commit -m "Add CI workflow"
 git push origin main
 
-echo "🌿 Creating feature branch..."
+echo "Creating feature branch..."
 git checkout -b "$BRANCH_NAME"
 
 echo "Updating README..."
@@ -46,7 +46,7 @@ git add README.md
 git commit -m "Update README via automation"
 git push -u origin "$BRANCH_NAME"
 
-echo "📬 Creating Pull Request..."
+echo "Creating Pull Request..."
 PR_URL=$(gh pr create \
   --title "Automated PR" \
   --body "This PR was created automatically via script." \
@@ -55,7 +55,7 @@ PR_URL=$(gh pr create \
 
 echo "PR Created: $PR_URL"
 
-echo "⏳ Waiting for CI to complete..."
+echo "Waiting for CI to complete..."
 
 sleep 10
 
@@ -66,20 +66,20 @@ gh run watch "$RUN_ID"
 STATUS=$(gh run view "$RUN_ID" --json conclusion -q '.conclusion')
 
 if [[ "$STATUS" == "success" ]]; then
-    echo "✅ CI Passed. Merging PR..."
+    echo "CI Passed. Merging PR..."
     gh pr merge --merge --delete-branch
 else
-    echo "❌ CI Failed. Creating Issue..."
+    echo "CI Failed. Creating Issue..."
 
     gh issue create \
-      --title "🚨 CI Failed for Automated PR" \
+      --title "CI Failed for Automated PR" \
       --body "The CI pipeline failed for PR: $PR_URL  
       
 Run ID: $RUN_ID  
 Please investigate the failure logs." \
       --label bug
 
-    echo "📝 Issue created for failed CI."
+    echo "Issue created for failed CI."
 fi
 
-echo "🎉 Automation Complete!"
+echo "Automation Complete!"
