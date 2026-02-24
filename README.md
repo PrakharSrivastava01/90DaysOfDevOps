@@ -1,81 +1,80 @@
 # 🎯 90 Days of DevOps — My Daily Assignment Journey (2026)
 
-Welcome to my **DevOps learning journey** — a hands-on commitment to mastering practical DevOps skills one day at a time.
+Welcome to my **90 Days of DevOps** hands-on journey.
 
-This fork (on the `daily-assignment` branch) tracks my **daily assignments**, command outputs, explanations, and real troubleshooting learnings as I progress through the challenge. :contentReference[oaicite:1]{index=1}
-
----
-
-## 📍 Current Progress (Updated)
-
-**✅ Completed:**  
-**Day 01 – Day 17** — completed with documented commands and explanations. :contentReference[oaicite:2]{index=2}
-
-**🛠 In Progress:**  
-✅ Shell Scripting fundamentals (variables, conditions, loops — underway). :contentReference[oaicite:3]{index=3}
+This repository tracks my daily assignments, practical exercises, command outputs, troubleshooting notes, and real implementations as I progress step by step toward mastering DevOps.
 
 ---
 
-## 📌 Focus Areas Covered So Far
+## 📊 Current Progress
 
-| Area | Status |
-|------|--------|
-| Linux Fundamentals | ✅ Completed |
-| File Permissions & Ownership | ✅ Completed |
-| User & Group Management | ✅ Completed |
-| Networking Basics (DNS, IP, Subnetting, Ports) | ✅ Completed |
-| Troubleshooting Commands | ✅ Completed |
-| Git & GitHub Workflows | ✅ Covered |
-| Shell Scripting | 🔄 In Progress |
+✅ **Completed: Day 01 – Day 31**
 
-*More topics (e.g., Docker, CI/CD, Kubernetes, Cloud, Terraform, Observability) will be added as I progress.*
+This includes:
+
+- Linux Fundamentals
+- User & Permission Management
+- Networking Basics
+- Shell Scripting
+- Git & GitHub Workflow
+- Introduction to Docker
+- Docker Images & Container Lifecycle
+
+Consistency > Motivation. 31 days strong.
 
 ---
 
-## 🗓 2026 Progress Tracker
+## 🧠 Topics Covered So Far
 
-### 📂 Linux Fundamentals
-- Day 01 – Introduction & Setup  
-- Day 02 – Basic Linux Commands  
-- Day 03 – File System & Navigation  
-- Day 04 – File Operations  
-- Day 05 – Text Processing  
-- Day 06 – Process Management  
-- Day 07 – Package Management  
-- Day 08 – Permissions Deep Dive  
-- Day 09 – User Management  
-- Day 10 – File Permissions  
-- Day 11 – File Ownership  
-- Day 12 – Advanced Linux Concepts  
-- Day 13 – Linux Practice & Troubleshooting  
+### 🐧 Linux Fundamentals
+- File system navigation
+- File operations
+- Text processing
+- Package management
+- Process management
+- System monitoring
+- Advanced Linux concepts
+- Troubleshooting scenarios
+
+### 👥 User & Permission Management
+- Users & groups
+- File ownership
+- chmod, chown, chgrp
+- Permission deep dive
 
 ### 🌐 Networking
-- Day 14 – Networking Fundamentals  
-- Day 15 – DNS, IP, Subnets & Ports  
-- Day 16 – Networking Commands Practice  
-- Day 17 – Connectivity & Port Checks  
+- IP addressing
+- Subnet basics
+- DNS concepts
+- Ports & protocols
+- Networking commands (ping, netstat, curl, etc.)
+- Connectivity troubleshooting
 
-### 🐚 Shell Scripting (Work In Progress)
-- Basic scripting structure  
-- Variables & arguments  
-- Conditional statements  
-- Loops  
-- Script automation examples  
+### 🐚 Shell Scripting
+- Script structure
+- Variables
+- User input
+- Conditional statements
+- Loops
+- Basic automation scripts
+
+### 🔧 Git & GitHub
+- Repository management
+- Branching strategies
+- Commits & PR workflow
+- CLI usage
+- Automation basics
+
+### 🐳 Docker (Up to Day 31)
+- Docker architecture
+- Images vs Containers
+- Image layers & caching
+- Pulling official images
+- Running containers
+- Container lifecycle
+- Basic Dockerfile understanding
 
 ---
-
-## 📌 What This Repository Shows
-
-This repository isn’t just notes — it’s **proof of consistent work**:
-
-✔ Daily hands-on practice  
-✔ Real command outputs  
-✔ Troubleshooting learnings  
-✔ Version-controlled progress  
-✔ Structured DevOps learning path
-
----
-
 
 
 # 🚀 90DaysOfDevOps
