@@ -1,0 +1,52 @@
+services:
+   database:
+      image: mysql:8.0
+      container_name: test-db
+      environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: mydb
+          MYSQL_PASSWORD: root
+          MYSQL_USER: mysql
+      networks:
+          - test-net
+      volumes:
+          - mysql-data:/var/lib/mysql
+      restart: always
+      healthcheck:
+          test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+          interval: 10s
+          timeout: 5s
+          retries: 10
+          start_period: 30s
+   flask:
+      build:
+          context: .
+      container_name: flask-app
+      environment:
+        DB_HOST: database
+        DB_USER: mysql
+        DB_NAME: mydb
+        DB_PASSWORD: root
+      networks:
+          - test-net
+      depends_on:
+          database:
+              condition: service_healthy
+      restart: always
+      ports:
+        - "5000:5000"
+   redis:
+      image: redis:latest
+        #container_name: redis
+      depends_on:
+          database:
+              condition: service_healthy
+      networks:
+          - test-net
+      restart: always
+
+
+networks:
+  test-net:
+volumes:
+  mysql-data:
