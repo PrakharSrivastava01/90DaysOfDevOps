@@ -1,165 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Prakhar | DevOps Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prakhar Srivastava | Cloud & DevOps Engineer</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-        body {
-            background: #0f172a;
-            color: #f1f5f9;
-            line-height: 1.6;
-        }
+<style>
+:root{
+    --bg:#0f172a;
+    --card:rgba(255,255,255,0.08);
+    --text:white;
+    --accent:#00f5ff;
+}
 
-        header {
-            text-align: center;
-            padding: 60px 20px;
-        }
+body.light{
+    --bg:#f4f7fb;
+    --card:rgba(255,255,255,0.7);
+    --text:#111;
+}
 
-        header h1 {
-            font-size: 2.8rem;
-            color: #38bdf8;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-        header p {
-            margin-top: 10px;
-            font-size: 1.2rem;
-            color: #cbd5e1;
-        }
+body{
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    transition:0.4s ease;
+}
 
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            background: #38bdf8;
-            color: #0f172a;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+/* Animated Gradient Background */
+.bg-animation{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:radial-gradient(circle at 20% 30%, #00f5ff40, transparent 40%),
+               radial-gradient(circle at 80% 70%, #8b5cf640, transparent 40%);
+    animation:moveBg 15s infinite alternate ease-in-out;
+    z-index:-1;
+}
 
-        .btn:hover {
-            background: #0ea5e9;
-        }
+@keyframes moveBg{
+    from{transform:translateY(-20px);}
+    to{transform:translateY(20px);}
+}
 
-        section {
-            padding: 40px 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    padding:100px 0;
+}
 
-        h2 {
-            margin-bottom: 20px;
-            color: #38bdf8;
-            text-align: center;
-        }
+.glass{
+    background:var(--card);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    padding:50px;
+    margin-bottom:60px;
+    border:1px solid rgba(255,255,255,0.15);
+    transition:0.4s ease;
+}
 
-        .skills, .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
+.glass:hover{
+    transform:translateY(-12px);
+    box-shadow:0 25px 50px rgba(0,0,0,0.4);
+}
 
-        .card {
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            transition: 0.3s;
-        }
+h1{
+    font-size:3rem;
+    font-weight:800;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-            background: #334155;
-        }
+.highlight{
+    background:linear-gradient(90deg,#00f5ff,#8b5cf6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
 
-        /* Clickable Project Cards */
-        .project-link {
-            text-decoration: none;
-            color: inherit;
-        }
+.typing{
+    font-size:1.2rem;
+    margin-top:20px;
+    min-height:30px;
+}
 
-        .project-link .card {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.btn{
+    padding:14px 30px;
+    border-radius:30px;
+    margin-right:15px;
+    text-decoration:none;
+    display:inline-block;
+    margin-top:30px;
+    transition:0.3s;
+    font-weight:600;
+}
 
-        .project-link .card:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
-        }
+.primary{
+    background:linear-gradient(90deg,#00f5ff,#8b5cf6);
+    color:black;
+}
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #020617;
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #94a3b8;
-        }
-    </style>
+.primary:hover{
+    transform:scale(1.08);
+}
+
+.secondary{
+    border:1px solid var(--accent);
+    color:var(--accent);
+}
+
+.secondary:hover{
+    background:var(--accent);
+    color:black;
+}
+
+.section-title{
+    margin-bottom:25px;
+    font-size:1.8rem;
+    border-left:4px solid var(--accent);
+    padding-left:12px;
+}
+
+.skills span{
+    display:inline-block;
+    padding:12px 20px;
+    margin:10px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.15);
+    transition:0.3s;
+}
+
+.skills span:hover{
+    background:linear-gradient(90deg,#00f5ff,#8b5cf6);
+    color:black;
+    transform:scale(1.1);
+}
+
+/* Scroll animation */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.project-card{
+    margin-bottom:25px;
+    padding:20px;
+    border-radius:15px;
+    transition:0.3s;
+}
+
+.project-card:hover{
+    background:rgba(255,255,255,0.1);
+    transform:scale(1.03);
+}
+
+.project-card a{
+    color:var(--accent);
+    text-decoration:none;
+    font-weight:600;
+}
+
+.toggle{
+    position:fixed;
+    top:20px;
+    right:20px;
+    cursor:pointer;
+    padding:10px 20px;
+    border-radius:30px;
+    background:linear-gradient(90deg,#00f5ff,#8b5cf6);
+    color:black;
+    font-weight:600;
+}
+
+footer{
+    text-align:center;
+    margin-top:80px;
+    padding-bottom:40px;
+}
+
+.signature{
+    font-size:1.1rem;
+    font-weight:600;
+    letter-spacing:2px;
+    opacity:0.6;
+    transition:0.3s ease;
+}
+
+.signature:hover{
+    opacity:1;
+    letter-spacing:4px;
+    color:var(--accent);
+}
+
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>Prakhar</h1>
-        <p> DevOps Engineer | 90 Days of DevOps Challenge</p>
-        <a href="https://github.com/Heyyprakhar1" class="btn" target="_blank">
-            View My GitHub
-        </a>
-    </header>
+<div class="bg-animation"></div>
+<div class="toggle" onclick="toggleTheme()">Toggle Theme</div>
 
-    <section>
-        <h2>🛠 Skills</h2>
-        <div class="skills">
-            <div class="card">Linux</div>
-            <div class="card">Docker</div>
-            <div class="card">AWS</div>
-            <div class="card">Jenkins</div>
-            <div class="card">Shell Scripting</div>
-            <div class="card">Git & GitHub</div>
-        </div>
-    </section>
+<div class="container">
 
-    <section>
-        <h2>🚀 Projects</h2>
-        <div class="projects">
+<!-- HERO -->
+<div class="glass reveal">
+    <h1>Hi, I'm <span class="highlight">Prakhar Srivastava</span></h1>
+    <div class="typing" id="typing"></div>
+    <a href="https://www.linkedin.com/in/heyyprakhar1/" target="_blank" class="btn primary">LinkedIn</a>
+    <a href="https://github.com/Heyyprakhar1" target="_blank" class="btn secondary">GitHub</a>
+    <a href="Prakhar-Srivastava-DevOps-Resume.pdf" download class="btn secondary">Download Resume</a>
+</div>
 
-            <a href="https://github.com/Heyyprakhar1/90DaysOfDevOps" target="_blank" class="project-link">
-                <div class="card">
-                    <h3>90 Days of DevOps</h3>
-                    <p>Hands-on DevOps learning challenge covering Linux, Docker, AWS & CI/CD.</p>
-                </div>
-            </a>
+<!-- ABOUT -->
+<div class="glass reveal">
+    <div class="section-title">About Me</div>
+    <p>
+    I began my professional journey at <strong>Concentrix</strong>, where I spent 1.5 years building and managing AWS-based infrastructure environments. 
+    During my early days as a DevOps Engineer, I worked on designing scalable cloud architectures, automating CI/CD pipelines, and improving deployment reliability.
+    </p>
+    <br>
+    <p>
+    My role involved provisioning infrastructure using Terraform & CloudFormation, containerizing applications with Docker, 
+    orchestrating workloads via Kubernetes, and implementing Jenkins-driven DevSecOps pipelines. 
+    I collaborated closely with development teams to streamline release cycles and ensure high system availability.
+    </p>
+    <br>
+    <p>
+    Today, I focus on building startup-grade, production-ready cloud systems using GitOps, automation-first practices, 
+    and scalable AWS architectures.
+    </p>
+</div>
 
-            <a href="https://github.com/Heyyprakhar1/two-tier-app/" target="_blank" class="project-link">
-                <div class="card">
-                    <h3>Flask + Docker App</h3>
-                    <p>Multi-stage build using Distroless image for secure production deployment.</p>
-                </div>
-            </a>
+<!-- SKILLS -->
+<div class="glass reveal">
+    <div class="section-title">Technical Stack</div>
+    <div class="skills">
+        <span>AWS (EC2, RDS, VPC, ALB, ASG, CloudWatch)</span>
+        <span>Terraform</span>
+        <span>CloudFormation</span>
+        <span>Docker</span>
+        <span>Kubernetes</span>
+        <span>Helm</span>
+        <span>Linux</span>
+        <span>Python</span>
+        <span>GitHub Actions (GitOps)</span>
+        <span>Jenkins (DevSecOps)</span>
+        <span>Ansible</span>
+        <span>Argo CD</span>
+    </div>
+</div>
 
-            
-        </div>
-    </section>
+<!-- PROJECTS -->
+<div class="glass reveal">
+    <div class="section-title">Projects</div>
 
-    <section style="text-align:center;">
-        <h2>📡 Test Backend API</h2>
-        <a href="/api/hello" class="btn">Call /api/hello</a>
-    </section>
+    <div class="project-card">
+        <strong>Cloud Infrastructure Architecture (AWS)</strong><br>
+        <a href="https://github.com/Heyyprakhar1/Assignment-for-devops" target="_blank">View Project →</a>
+    </div>
 
-    <footer>
-        © 2026 Prakhar | Built with Python, Flask & Docker
-    </footer>
+    <div class="project-card">
+        <strong>Dockerized Two-Tier Flask Application</strong><br>
+        <a href="https://github.com/Heyyprakhar1/two-tier-app" target="_blank">View Project →</a>
+    </div>
+
+    <div class="project-card">
+        <strong>Node.js Three-Tier Application (Production-Ready)</strong><br>
+        <a href="https://github.com/Heyyprakhar1/Node-three-tier-app" target="_blank">View Project →</a>
+    </div>
+
+</div>
+
+<footer>
+	<span class="signature">Prakhar Srivastava</span>
+</footer>
+
+</div>
+
+<script>
+// Typing Effect
+const texts = [
+"Cloud & DevOps Engineer 🚀",
+"AWS Infrastructure Specialist ☁️",
+"CI/CD & GitOps Builder ⚙️",
+"DevSecOps Practitioner 🔐",
+"Startup-Focused Automation Engineer 🔥"
+];
+
+let count = 0;
+let index = 0;
+let currentText = '';
+let letter = '';
+
+(function type(){
+    if(count === texts.length){
+        count = 0;
+    }
+    currentText = texts[count];
+    letter = currentText.slice(0, ++index);
+    document.getElementById('typing').textContent = letter;
+    if(letter.length === currentText.length){
+        setTimeout(()=>{
+            count++;
+            index = 0;
+        },1500);
+    }
+    setTimeout(type,80);
+})();
+
+// Theme Toggle
+function toggleTheme(){
+    document.body.classList.toggle("light");
+}
+
+// Scroll Reveal
+window.addEventListener("scroll",function(){
+    document.querySelectorAll(".reveal").forEach(el=>{
+        if(el.getBoundingClientRect().top < window.innerHeight - 100){
+            el.classList.add("active");
+        }
+    });
+});
+</script>
 
 </body>
 </html>
