@@ -1,12 +1,14 @@
-# This is the workflow name
+# Demo is the workflow name
 name: demo
-
 on: 
-  push:
-
+  push: 
+    branches: [master]
 jobs:
+# code is the name of the job
   code:
     runs-on: ubuntu-latest
     steps:
-      - name: code-build
-      run: echo "code is building."
+        - name: code-build
+          run: echo " Code build."
+          
+    
