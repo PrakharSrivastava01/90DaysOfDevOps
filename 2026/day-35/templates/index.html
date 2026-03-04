@@ -856,24 +856,23 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-text">© 2026 <span>PRAKHAR SRIVASTAVA</span> — Built with intention.</div>
-  <div class="footer-text">AUTOMATE EVERYTHING · <span>SECURE BY D/span> · DEPLOY WITH CONFIDENCE</div>
+  <div class="footer-text">AUTOMATE EVERYTHING · <span>SECURE BY DESIGN</span> · DEPLOY WITH CONFIDENCE</div>
 </footer>
 
 <script>
   // ── Cursor ──
   const cursor = document.getElementById('cursor');
   const trail  = document.getElementById('cursorTrail');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
+  document.addEventListener('mousemove',sor.style.left = e.clientX + 'px';
     cursor.style.top  = e.clientY + 'px';
     setTimeout(()=>{ trail.style.left = e.clientX+'px'; trail.style.top = e.clientY+'px'; }, 80);
   });
-  document.querySelectorAll('a,button,.stat,.skill-cat,.project-card,.cert-card').l => {
+  document.querySelectorAll('a,button,.stat,.skill-cat,.project-card,.cert-card').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%,-50%) scale(2)');
     el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
   });
 
-  // ── Scroll progress ──
+  // ── Scroll pess ──
   window.addEventListener('scroll', () => {
     const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
     document.getElementById('scrollProgress').style.width = pct + '%';
@@ -887,33 +886,34 @@
       }
     });
   }, { threshold:.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('rEach(el => observer.observe(el));
 
   // ── Typing effect ──
   const lines = [
     'Currently on #90DaysOfDevOps',
     'Specializing in AWS 3-Tier Architectures',
     'Automating deployments with Terraform',
-    'Containerizing apps with Docker + K 'Building CI/CD pipelines that actually work',
+    'Containerizing apps with Docker + K8s',
+    'Building CI/CD pipelines that actually work',
   ];
   let li=0, ci=0, deleting=false;
   const el = document.getElementById('typingText');
   function type(){
     const line = lines[li];
-    if(!deleting){ el.textContent = line.slice(0,++ci); if(ci===line.length){ deleting=true; setTimeout(type,1800); return; } }
+    if(!deleting){ el.textContent = line.slice(0,++ci); if(ci=ength){ deleting=true; setTimeout(type,1800); return; } }
     else { el.textContent = line.slice(0,--ci); if(ci===0){ deleting=false; li=(li+1)%lines.length; } }
     setTimeout(type, deleting ? 40 : 80);
   }
   type();
 
   // ── Form ──
-  function hait(e){
+  function handleSubmit(e){
     e.preventDefault();
     const btn = e.target.querySelector('.form-submit');
     btn.textContent = 'MESSAGE SENT ✓';
     btn.style.background = 'var(--cyan)';
     btn.style.color = 'var(--bg)';
-    setTimeout(()=>{ btn.textContent='SEND MESSAGE →'; btn.style.background=''; btn.style.color=''; e.target.reset(); },3000);
+    setTimeout(()=>{ btn.textContent='SEND'; btn.style.background=''; btn.style.color=''; e.target.reset(); },3000);
   }
 </script>
 </body>
