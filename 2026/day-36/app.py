@@ -6,7 +6,11 @@ from flask import Flask, render_template, request, redirect
 app = Flask(__name__)
 
 def get_db_connection():
+<<<<<<< HEAD
     for i in range(10):  # retry 10 times
+=======
+    while True:
+>>>>>>> 1fdbb6240767db823b9e5c89116cdba79be075c2
         try:
             connection = pymysql.connect(
                 host=os.getenv("MYSQL_HOST", "mysql"),
@@ -15,6 +19,7 @@ def get_db_connection():
                 database=os.getenv("MYSQL_DB", "mydb"),
                 cursorclass=pymysql.cursors.DictCursor
             )
+<<<<<<< HEAD
             print("Connected to MySQL!")
             return connection
         except pymysql.err.OperationalError as e:
@@ -22,6 +27,14 @@ def get_db_connection():
             time.sleep(3)
 
     raise RuntimeError("Database connection failed after retries")
+=======
+            print("✅ Connected to MySQL!")
+            return connection
+        except pymysql.err.OperationalError:
+            print("⏳ MySQL not ready, retrying in 5 seconds...")
+            time.sleep(5)
+
+>>>>>>> 1fdbb6240767db823b9e5c89116cdba79be075c2
 
 def init_db():
     connection = get_db_connection()
