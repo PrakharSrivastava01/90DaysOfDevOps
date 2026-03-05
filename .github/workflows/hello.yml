@@ -2,6 +2,11 @@ name: hello workflow
 on:
   push:
     branches: [master]
+    paths:
+      - "**.html"
+      - "**.md"
+  workflow_dispatch:
+
 jobs:
   greet:
     runs-on: ubuntu-latest
