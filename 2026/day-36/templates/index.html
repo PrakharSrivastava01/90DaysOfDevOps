@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Feedback Board</title>
+</head>
+<body>
+    <h2>Submit Feedback</h2>
+
+    <form method="POST" action="/submit">
+        <input type="text" name="name" placeholder="Your Name" required><br><br>
+        <textarea name="message" placeholder="Your Feedback" required></textarea><br><br>
+        
+        <label>Rating (1-5):</label>
+        <input type="number" name="rating" min="1" max="5" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <br>
+    <a href="/feedbacks">View All Feedback</a>
+</body>
+</html>

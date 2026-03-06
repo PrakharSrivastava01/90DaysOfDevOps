@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Feedback</title>
+</head>
+<body>
+    <h2>All Feedback</h2>
+
+    <p><strong>Average Rating:</strong> {{ avg_rating }}</p>
+
+    {% for feedback in feedbacks %}
+        <hr>
+        <p><strong>Name:</strong> {{ feedback[1] }}</p>
+        <p><strong>Message:</strong> {{ feedback[2] }}</p>
+        <p><strong>Rating:</strong> {{ feedback[3] }}/5</p>
+        <p><small>{{ feedback[4] }}</small></p>
+    {% endfor %}
+
+    <br>
+    <a href="/">Back</a>
+</body>
+</html>
